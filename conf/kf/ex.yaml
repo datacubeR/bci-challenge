@@ -1,0 +1,4 @@
+base_name: train_nonull_exc.csv
+n_splits: 5
+rs: 123
+output: kfold_exc.csv

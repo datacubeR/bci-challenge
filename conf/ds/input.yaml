@@ -1,0 +1,5 @@
+name: input
+train_name: train_imputable.csv
+test_name: test_imputable.csv
+kfold: kfold.csv
+holdout: False

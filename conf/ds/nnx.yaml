@@ -1,0 +1,5 @@
+name: nnx
+train_name: train_nonull_exc.csv
+test_name: test_nonull.csv
+kfold: kfold_exc.csv
+holdout: False
