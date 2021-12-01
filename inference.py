@@ -19,22 +19,27 @@ def create_submission(cfg: DictConfig):
     log.info(f"{df_train.shape[0]} rows imported from {train_name}")
     log.info(f"{df_test.shape[0]} rows imported from {test_name}")
 
-    X_train = df_train.drop(columns = ['id','mes','target_mes'])
-    y_train = df_train.target_mes
+    X = dict(train = df_train.drop(columns = ['id','mes','target_mes']),
+            test = df_test.drop(columns = ['id','mes']))
+    
+    y = dict(train = df_train.target_mes,
+            test = None)
 
-    X_test = df_test.drop(columns = ['id','mes'])
 
-    pipe = hydra.utils.call(cfg.models.inference)
-        
-    pipe.fit(X_train, y_train)
+    log.info(f"Training in the whole Training Set...")
+    pipe = hydra.utils.call(cfg.models.inference, X = X, y = y)
 
+    log.info(f"Predicting Test Set ...")
     if cfg.models.clip:
-        df_test['target_mes'] = np.where(pipe.predict(X_test)<0,0, pipe.predict(X_test))
+        df_test['target_mes'] = np.where(pipe.predict(X['test'])<0,0, pipe.predict(X_test))
         log.info('Predictions with no clipping')
     else: 
-        df_test['target_mes'] = pipe.predict(X_test)
+        df_test['target_mes'] = pipe.predict(X['test'])
 
     df_test[['id','mes','target_mes']].to_csv('submission.csv', index = False)
+    
+    return {'study': None,
+            'logging': False}
 
 if __name__ == '__main__':
     tic = timer()

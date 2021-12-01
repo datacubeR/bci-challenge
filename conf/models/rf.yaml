@@ -1,0 +1,10 @@
+name: Random Forest
+type:
+  _target_: train.rf
+  random_state: ${random_state}
+
+inference: 
+  _target_: train.rf
+  random_state: ${random_state}
+
+clip: False

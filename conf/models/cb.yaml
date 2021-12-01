@@ -1,0 +1,10 @@
+name: Catboost
+type:
+  _target_: train.catboost
+  random_state: ${random_state}
+
+inference: 
+  _target_: train.catboost
+  random_state: ${random_state}
+
+clip: False

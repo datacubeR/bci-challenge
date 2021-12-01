@@ -1,6 +1,7 @@
 project_name: 'BCI Challenge'
 random_state: 123
-n_trials: ???
+hpo: False
+n_trials: 30
 
 hydra:
   callbacks:
