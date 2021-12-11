@@ -30,9 +30,13 @@ def train_model(cfg: DictConfig):
 
     df = df.merge(kfold, on = ['id', 'mes'], how = 'left')
     target = ['target_mes']
-    cat_vars = ['tipo_seg','categoria','tipo_com','tipo_cat','tipo_cli','month','year']
+    cat_vars = ['tipo_ban','tipo_seg','categoria','tipo_com','tipo_cat','tipo_cli','month','year']
     int_variables = df.filter(like = '_trx').columns.tolist()
     float_variables = [vars for vars in df.columns if vars not in int_variables + cat_vars + target]
+    
+    
+    df[['month', 'year']] = df[['month', 'year']].astype('int64')
+    df[cat_vars] = df[cat_vars].astype('category')
     log.info(f'Training set with {df.shape[0]} rows and {df.shape[1]} columns')
 
 
@@ -59,7 +63,7 @@ def train_model(cfg: DictConfig):
             
             score_train.append(mae_train)
             log.info(f'Training MAE for Fold {val_fold}: {mae_train}')
-            log.info(f'Validation MAE for Fold {val_fold}: {mae_train}')
+            log.info(f'Validation MAE for Fold {val_fold}: {mae}')
             score.append(mae)
             
             if cfg.ds.holdout:

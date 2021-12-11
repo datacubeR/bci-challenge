@@ -1,5 +1,5 @@
-name: full
-train_name: train_full.csv
+name: Boruta Shap CB
+train_name: Boruta_Shap_cb.csv
 test_name: test_full.csv
 kfold: kfold.csv
 holdout: False

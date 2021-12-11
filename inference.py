@@ -18,6 +18,14 @@ def create_submission(cfg: DictConfig):
     df_test = pd.read_csv(to_absolute_path('data/' + test_name))
     log.info(f"{df_train.shape[0]} rows imported from {train_name}")
     log.info(f"{df_test.shape[0]} rows imported from {test_name}")
+    
+    target = ['target_mes']
+    cat_vars = ['tipo_ban','tipo_seg','categoria','tipo_com','tipo_cat','tipo_cli','month','year']
+    int_variables = df_train.filter(like = '_trx').columns.tolist()
+    float_variables = [vars for vars in df_train.columns if vars not in int_variables + cat_vars + target]
+    
+    df_train[cat_vars] = df_train[cat_vars].astype('category')
+    df_test[cat_vars] = df_test[cat_vars].astype('category')
 
     X = dict(train = df_train.drop(columns = ['id','mes','target_mes']),
             test = df_test.drop(columns = ['id','mes']))
@@ -31,7 +39,7 @@ def create_submission(cfg: DictConfig):
 
     log.info(f"Predicting Test Set ...")
     if cfg.models.clip:
-        df_test['target_mes'] = np.where(pipe.predict(X['test'])<0,0, pipe.predict(X_test))
+        df_test['target_mes'] = np.where(pipe.predict(X['test'])<0,0, pipe.predict(X['test']))
         log.info('Predictions with no clipping')
     else: 
         df_test['target_mes'] = pipe.predict(X['test'])
