@@ -1,0 +1,4 @@
+model_name: lgb_v1
+algo:
+  _target_: src.train.lgb_v1
+  cat_vars: ['tipo_ban','tipo_seg','categoria','tipo_com','tipo_cat','tipo_cli']

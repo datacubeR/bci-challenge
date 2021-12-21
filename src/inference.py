@@ -7,7 +7,10 @@ import joblib
 @hydra.main(config_path='conf', config_name='config')
 def predict(cfg: DictConfig):
     df_test = pd.read_csv(to_absolute_path(cfg.test_data))
+    cat_vars = ['tipo_ban','tipo_seg','categoria','tipo_com','tipo_cat','tipo_cli']
+    df_test[cat_vars] = df_test[cat_vars].astype('category')
     id = df_test[['id','mes']]
+    
 
     preds_dict = {}
     for fold in range(cfg.n_splits):

@@ -3,10 +3,9 @@ catboost_info
 multirun
 outputs
 wandb
-*.ipynb
 *.csv
 *.xlsx
+*.joblib
 data
-models
-input
-submissions
+legacy
+preds

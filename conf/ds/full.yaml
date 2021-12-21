@@ -1,5 +1,0 @@
-name: full
-train_name: train_full.csv
-test_name: test_full.csv
-kfold: kfold.csv
-holdout: False

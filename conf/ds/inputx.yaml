@@ -1,5 +1,0 @@
-name: input
-train_name: train_imputable_exc.csv
-test_name: test_imputable.csv
-kfold: kfold.csv
-holdout: False

@@ -1,6 +1,0 @@
-name: nn
-train_name: train_nonull.csv
-test_name: test_nonull.csv
-kfold: kfold.csv
-holdout: False
-

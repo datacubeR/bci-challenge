@@ -1,7 +1,8 @@
 training_data: input/train_folds.csv
 test_data: input/test_data.csv
+
 n_splits: 5
 clip: true
-model_name: ???
+model_name: ${model.model_name}
 
 

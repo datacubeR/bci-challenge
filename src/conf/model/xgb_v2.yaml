@@ -1,0 +1,3 @@
+model_name: xgb_v2
+algo:
+  _target_: src.train.xgb_v2

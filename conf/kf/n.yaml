@@ -1,4 +1,0 @@
-base_name: train_nonull.csv
-n_splits: 5
-rs: 123
-output: kfold.csv
